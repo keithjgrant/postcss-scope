@@ -1,0 +1,88 @@
+<!doctype html>
+<head>
+<style>
+/* input */
+@scope .alpha {
+  h4 {
+    color: green;
+    font-size: 2em;
+  }
+}
+
+@scope .beta {
+  h4 {
+    color: red;
+  }
+
+  ul > li > a {
+    padding: 0.5em;
+  }
+
+  a {
+    padding: 2px;
+  }
+}
+
+@scope .gamma {
+  a {
+    padding: 1em;
+    color: blue;
+  }
+}
+
+/* output */
+
+.alpha {
+  --\[h4\]-color: green;
+  --\[h4\]-font-size: 2em;
+}
+
+.beta {
+  --\[h4\]-color: red;
+  --\[ul-li-a\]-padding: 0.5em;
+  --\[a\]-padding: 2px;
+}
+
+.gamma {
+  --\[a\]-padding: 1em;
+  --\[a\]-color: blue;
+}
+
+h4 {
+  color: var(--\[h4\]-color);
+  font-size: var(--\[h4\]-font-size);
+}
+
+ul > li > a {
+  /* how to fallback to a? */
+  padding: var(--\[ul-li-a\]-padding, var(--\[a\]-padding));
+}
+
+a {
+  padding: var(--\[a\]-padding);
+  color: var(--\[a\]-color);
+}
+
+</style>
+</head>
+<body>
+  <div class="alpha">
+    <div class="beta">
+      <h4>beta: red; 2em (inherited)</h4>
+    </div>
+  </div>
+  <div class="beta">
+    <div class="alpha">
+      <h4>alpha: green, font size 2em</h4>
+    </div>
+  </div>
+
+  <div class="beta">
+    <ul><li><a>beta: padding 0.5em</a></li></ul>
+    <a>beta: padding 2px</a>
+  </div>
+  <div class="gamma">
+    <ul><li><a>gamma: padding 1em, blue</a></li></ul>
+    <a>gamma: padding 1em, blue</a>
+  </div>
+</body>
