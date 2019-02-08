@@ -1,30 +1,14 @@
 import postcss from 'postcss';
 import transformScopeRule from './transformScopeRule';
 
-const DEFAULT_OPTIONS = {
-  importPaths: ['node_modules'],
-  importPromise: [],
-  importCache: {},
-};
+const DEFAULT_OPTIONS = {};
 
-function resolveImport(opts) {
-  return (id, cwd) => {
-    return resolve(id, {cwd, readFile: true, cache: opts.importCache});
-  };
-}
-
-export default postcss.plugin('postcss-kolache', opts => {
-  return function(root, result) {
+export default postcss.plugin('postcss-scope', opts => {
+  return function(root) {
     opts = Object.assign(DEFAULT_OPTIONS, opts);
-    opts.importResolve = Object(opts).resolve || resolveImport(opts);
-    opts.result = result;
-
-    const promises = [];
 
     root.walkAtRules('scope', rule => {
-      promises.push(transformScopeRule(rule, opts));
+      transformScopeRule(rule, opts);
     });
-
-    return Promise.all(promises);
   };
 });

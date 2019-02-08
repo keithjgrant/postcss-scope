@@ -1,6 +1,6 @@
 # PostCSS Scope
 
-## Add scoped styles to CSS.
+## Add scoped styles to CSS
 
 Styles in an inner scope will override those from an outer scope, *regardless of selector specificity*
 
@@ -18,7 +18,7 @@ Styles in an inner scope will override those from an outer scope, *regardless of
 }
 ```
 
-This compiles to… something very ugly. But it makes this work:
+This compiles to… something very ugly. But it’s not overly large, and it makes this work:
 
 ```html
 <div class="foo-module">

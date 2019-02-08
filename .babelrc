@@ -1,0 +1,18 @@
+{
+  "env": {
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            modules: false
+          }
+        ]
+      ],
+      "plugins": ["external-helpers"]
+    },
+    "development": {
+      "presets": [["env"]]
+    }
+  }
+}

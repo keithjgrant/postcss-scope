@@ -28,3 +28,27 @@ it('smoke test', () => {
   `
   );
 });
+
+it.skip('should transform scope', () => {
+  return run(
+    `
+@scope .alpha {
+  h4 {
+    color: green;
+    font-size: 2em;
+  }
+}
+  `,
+    `
+.alpha {
+  --\[h4\]-color: green;
+  --\[h4\]-font-size: 2em;
+}
+
+.alpha h4 {
+  color: var(--\[h4\]-color);
+  font-size: var(--\[h4\]-font-size);
+}
+  `
+  );
+});
